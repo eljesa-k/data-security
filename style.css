@@ -76,7 +76,7 @@ body {
 }
 .keys{
     display: flex;
-    gap: 20px;
+    gap: 50px;
     align-items: baseline;
 }
 .keys input{
@@ -112,14 +112,17 @@ body {
     width: 93%
 }
 
-.material-symbols-outlined {
+
+ .material-symbols-outlined {
      font-variation-settings:
-             'FILL' 0,
+             'FILL' 1,
              'wght' 400,
              'GRAD' 0,
              'opsz' 48;
-    cursor: pointer;
-}
+     cursor: pointer;
+     font-size: 35px !important;
+     color: #07cca1;
+ }
 
 #invalid-keys-message{
     color: red;
