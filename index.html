@@ -27,11 +27,12 @@
             <!-- Tab content -->
             <div id="Home" class="tabcontent">
                 <h3>Affine cipher</h3>
-                <p>The affine cipher is a type of monoalphabetic substitution cipher, where each letter in an alphabet is mapped to its numeric equivalent, encrypted using a simple mathematical function, and converted back to a letter. The formula used means that each letter encrypts to one other letter, and back again, meaning the cipher is essentially a standard substitution cipher with a rule governing which letter goes to which. As such, it has the weaknesses of all substitution ciphers. Each letter is enciphered with the function (ax + b) mod 26, where b is the magnitude of the shift.
-
+                <p style="margin-bottom: 50px">The affine cipher is a type of monoalphabetic substitution cipher, where each letter in an alphabet is mapped to its numeric equivalent, encrypted using a simple mathematical function, and converted back to a letter. The formula used means that each letter encrypts to one other letter, and back again, meaning the cipher is essentially a standard substitution cipher with a rule governing which letter goes to which. As such, it has the weaknesses of all substitution ciphers. Each letter is enciphered with the function (ax + b) mod 26, where b is the magnitude of the shift.
                 </p>
+                <center>
+                <embed src="Siguria_e_te_dhenave (1).pdf#toolbar=0&navpanes=0&scrollbar=0&statusbar=0" type="application/pdf" width="62%" height="700px" >
+                </center>
             </div>
-
             <div id="Encryption" class="tabcontent">
                 <div class="tab-content-container">
                     <p>Keys: </p>
@@ -105,11 +106,11 @@
             <div id="Decryption" class="tabcontent">
                 <div class="tab-content-container">
                     <p>Keys: </p>
-                    <div class="keys">
+                    <div class="keys-dec">
                         <span>
                             <label for="a-key">A:</label>
                             <input type="text" placeholder="A"
-                                   class="input input-text"
+                                   class="input-dec input-text"
                                    id="a-key-dec"
                                    name="a-key"
                             >
@@ -119,7 +120,7 @@
                             <label for="b-key">B:</label>
                             <input type="text"
                                    placeholder="B"
-                                   class="input input-text"
+                                   class="input-dec input-text"
                                    id="b-key-dec"
                                    name="b-key"
                             >
