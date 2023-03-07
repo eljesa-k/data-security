@@ -4,7 +4,6 @@
         <meta charset="UTF-8">
         <title>Affine Cypher</title>
         <link rel="stylesheet" href="./style.css">
-<!--        <script type="application/javascript" src="script.js"></script>-->
         <script type="application/javascript" src="encode_decode.js"></script>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -70,7 +69,13 @@
                                     id="input" name="input"
                                     cols="50" rows="10"
                             ></textarea>
-
+                            <div class="tooltip">
+                                <span class="material-symbols-outlined clear-enc"
+                                      onclick="clearEncInput()">
+                                      delete
+                                </span>
+                                <span class="tooltiptext">Clear</span>
+                            </div>
                         </div>
                         <div>
                             <span class="material-symbols-outlined"
@@ -84,6 +89,13 @@
                                     id="output" name="output"
                                     cols="50" rows="10"
                             ></textarea>
+                            <div class="tooltip">
+                                <span class="material-symbols-outlined clear-enc copy-enc"
+                                      onclick="copyEncOutput()">
+                                      content_copy
+                                </span>
+                                <span class="tooltiptext">Copy</span>
+                            </div>
                         </div>
                     </div>
                 </div>

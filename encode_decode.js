@@ -23,7 +23,7 @@ function encrypt(){
     let output = ''
     for(let i = 0; i< input.length; i++){
         let p = input.charAt(i)
-        if(p === '')
+        if(p === ' ')
             output += p;
         else {
             console.log(input.charCodeAt(i)-97, (a * (input.charCodeAt(i) - 97) + b) )
@@ -53,7 +53,7 @@ function encrypt1(){
     let output = ''
     for(let i = 0; i< input.length; i++){
         let p = input.charAt(i)
-        if(p === '')
+        if(p === ' ')
             output += p;
         else {
             console.log(input.charCodeAt(i)-97, (a * (input.charCodeAt(i) - 97) + b) )
@@ -116,4 +116,13 @@ function validate1(){
     }
 
     return res;
+}
+
+function clearEncInput(){
+    document.getElementById('input').value = null
+    document.getElementById('output').value = null
+}
+function copyEncOutput(){
+    let text = document.getElementById('output').value
+    navigator.clipboard.writeText(text)
 }
