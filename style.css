@@ -82,7 +82,19 @@ body {
 .keys input{
     flex: 1;
 }
-.input, .input-dec, .input:focus, textarea{
+
+.keys-dec{
+    display: flex;
+    /*justify-content: space-between;*/
+    gap: 95px;
+    align-items: baseline;
+}
+.keys-dec input{
+    flex: 1;
+    width: 382px;
+}
+
+.input,.input-dec, .input:focus, textarea{
     padding: 10px 15px;
     border-radius: 3px;
     border: 1px solid #aafcb8;
