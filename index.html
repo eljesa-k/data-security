@@ -91,8 +91,55 @@
             </div>
 
             <div id="Decryption" class="tabcontent">
-                <h3>Decryption</h3>
-                <p>Decryption stuff</p>
+                <div class="tab-content-container">
+                    <p>Keys: </p>
+                    <div class="keys">
+                        <span>
+                            <label for="a-key">A:</label>
+                            <input type="text" placeholder="A"
+                                   class="input input-text"
+                                   id="a-key-dec"
+                                   name="a-key"
+                            >
+                        </span>
+
+                        <span>
+                            <label for="b-key">B:</label>
+                            <input type="text"
+                                   placeholder="B"
+                                   class="input input-text"
+                                   id="b-key-dec"
+                                   name="b-key"
+                            >
+                        </span>
+
+                    </div>
+                    <p id="invalid-keys-message-dec">*Keys a and b must be integers</p>
+                    <div class="container">
+                        <div class="input-container">
+                            <label for="input" class="label" >Input:</label>
+                            <textarea
+                                    id="input-dec" name="input"
+                                    cols="50" rows="10"
+                            ></textarea>
+
+                        </div>
+                        <div>
+                            <span class="material-symbols-outlined"
+                                  onclick="encrypt1()"
+                            >play_arrow
+                            </span>
+                        </div>
+                        <div class="input-container">
+                            <label for="output" class="label">Output:</label>
+                            <textarea
+                                    id="output-dec" name="output"
+                                    cols="50" rows="10"
+                            ></textarea>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
 

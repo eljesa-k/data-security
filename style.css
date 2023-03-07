@@ -82,7 +82,7 @@ body {
 .keys input{
     flex: 1;
 }
-.input, .input:focus, textarea{
+.input, .input-dec, .input:focus, textarea{
     padding: 10px 15px;
     border-radius: 3px;
     border: 1px solid #aafcb8;
@@ -125,6 +125,12 @@ body {
  }
 
 #invalid-keys-message{
+    color: red;
+    font-size: 14px;
+    display: none;
+}
+
+#invalid-keys-message-dec{
     color: red;
     font-size: 14px;
     display: none;
