@@ -21,9 +21,8 @@ function openCity(evt, cityName) {
     evt.currentTarget.className += " active";
 }
 
-// Get the element with id="defaultOpen" and click on it
-// document.getElementById("default-tab").click();
-// console.log(document.getElementById('default-tab'))
-// console.log('ok')
+// Get the element with id="default-tab" and click on it
+document.getElementById('default-tab').click()
+
 
 
