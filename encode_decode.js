@@ -5,7 +5,7 @@ function generateRandomKeys(){
     let a_index = Math.random() * 12;
     a.value = a_key_possibilities[parseInt(a_index)];
 
-    b.value = parseInt(Math.random() * 26);
+    b.value = parseInt(Math.random() * 25) + 1;
 
     // using validate to remove error in case it is shown
     validate()
@@ -26,8 +26,6 @@ function encrypt(){
         if(p === ' ')
             output += p;
         else {
-            console.log(input.charCodeAt(i)-97, (a * (input.charCodeAt(i) - 97) + b) )
-
             output += String.fromCharCode((a * (input.charCodeAt(i) - 97) + b) % 26 + 97)
         }
     }
@@ -41,7 +39,7 @@ function encrypt1(){
     let a = parseInt(document.getElementById('a-key-dec').value)
     let b = parseInt(document.getElementById('b-key-dec').value)
 
-    let inversi=1
+    let inversi = 1
         for(let i = 1; i<26; i++)
           if((a*i)%26==1)
           inversi=i
@@ -56,7 +54,6 @@ function encrypt1(){
         if(p === ' ')
             output += p;
         else {
-            console.log(input.charCodeAt(i)-97, (a * (input.charCodeAt(i) - 97) + b) )
             output += String.fromCharCode(((input.charCodeAt(i) - 97) - b + 26) * inversi % 26 + 97)
         }
     }
@@ -65,57 +62,66 @@ function encrypt1(){
 }
 
 function validate(){
-    // TODO: validate decimal numbers and a has multiplicative inverse mod26, and b<=25
-    //  let a_key_possibilities = [1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25];
-    //     a_key_possibilities.find(k => k === a)
+    let a_key_possibilities = [1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25];
 
     let a = document.getElementById('a-key')
     let b = document.getElementById('b-key')
+
+    document.getElementById('invalid-keys-message').style.display = 'none'
+    a.style.borderColor = '#aafcb8'
+    b.style.borderColor = '#aafcb8'
     let res = true
-    if(!a.value || isNaN(a.value)){
+
+    let reg = new RegExp('^[0-9]+$');
+
+    if(!reg.test(a.value) || !a_key_possibilities.find(k => k === parseInt(a.value))){
         a.style.borderColor = 'red'
         res = false
     }
-    if(!b.value || isNaN(b.value)){
+    if(!reg.test(b.value) || !(parseInt(b.value) > 0) || !(parseInt(b.value) < 26)){
         b.style.borderColor = 'red'
         res = false
     }
+
     if(!res)
         document.getElementById('invalid-keys-message').style.display = 'block'
-    else {
-        document.getElementById('invalid-keys-message').style.display = 'none'
-        a.style.borderColor = '#aafcb8'
-        b.style.borderColor = '#aafcb8'
-    }
-
     return res;
 }
 
 function validate1(){
-    // TODO: validate decimal numbers and a has multiplicative inverse mod26, and b<=25
-    //  let a_key_possibilities = [1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25];
-    //     a_key_possibilities.find(k => k === a)
+    let a_key_possibilities = [1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25];
 
     let a = document.getElementById('a-key-dec')
     let b = document.getElementById('b-key-dec')
+
+    document.getElementById('invalid-keys-message-dec').style.display = 'none'
+    a.style.borderColor = '#aafcb8'
+    b.style.borderColor = '#aafcb8'
+
     let res = true
-    if(!a.value || isNaN(a.value)){
+    let reg = new RegExp('^[0-9]+$');
+
+    if(!reg.test(a.value) || !a_key_possibilities.find(k => k === parseInt(a.value))){
         a.style.borderColor = 'red'
         res = false
     }
-    if(!b.value || isNaN(b.value)){
+    if(!reg.test(b.value) || !(parseInt(b.value) > 0) || !(parseInt(b.value) < 26)){
         b.style.borderColor = 'red'
         res = false
     }
     if(!res)
         document.getElementById('invalid-keys-message-dec').style.display = 'block'
-    else {
-        document.getElementById('invalid-keys-message-dec').style.display = 'none'
-        a.style.borderColor = '#aafcb8'
-        b.style.borderColor = '#aafcb8'
-    }
-
     return res;
+}
+
+
+function clearEncInput(){
+    document.getElementById('input').value = null
+    document.getElementById('output').value = null
+}
+function copyEncOutput(){
+    let text = document.getElementById('output').value
+    navigator.clipboard.writeText(text)
 }
 
 function clearEncInput(){

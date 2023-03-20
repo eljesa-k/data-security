@@ -36,7 +36,7 @@
                     Në përgjithësi, Affine Cipher është një metodë e thjeshtë por efektive e kriptimit që është përdorur për shekuj. Ndonëse mund të mos jetë aq i sigurt sa algoritmet moderne kriptografike, mund të jetë ende i dobishëm në situata të caktuara ku kërkohet kriptimi bazë.
                 </p>
                 <center>
-                <embed src="Siguria_e_te_dhenave (1).pdf#toolbar=0&navpanes=0&scrollbar=0&statusbar=0" type="application/pdf" width="62%" height="700px" >
+                <embed src="Siguria_e_te_dhenave.pdf#toolbar=0&navpanes=0&scrollbar=0&statusbar=0" type="application/pdf" width="62%" height="700px" >
                 </center>
             </div>
             <div id="Encryption" class="tabcontent">
@@ -68,7 +68,7 @@
                                onclick="generateRandomKeys()"
                         >
                     </div>
-                    <p id="invalid-keys-message">*Keys a and b must be integers</p>
+                    <p id="invalid-keys-message">*Keys a and b must be positive integers, and the multiplicative inverse of a should exist</p>
                     <div class="container">
                         <div class="input-container">
                             <label for="input" class="label" >Input:</label>
@@ -133,7 +133,8 @@
                         </span>
 
                     </div>
-                    <p id="invalid-keys-message-dec">*Keys a and b must be integers</p>
+                    <p id="invalid-keys-message-dec">*Keys a and b must be positive integers, and the multiplicative inverse of a should exist</p>
+
                     <div class="container">
                         <div class="input-container">
                             <label for="input" class="label" >Input:</label>
