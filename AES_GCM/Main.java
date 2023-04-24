@@ -1,11 +1,14 @@
 package AES_GCM;
 
-public class Main {
-    public static void main(String[] args) {
-        KeyGenerator keyGenerator = new KeyGenerator("CAF1");
-        Encryption encryption = new Encryption(keyGenerator);
+import java.io.*;
 
-        encryption.encrypt("AE24");
+public class Main {
+    public static void main(String[] args) throws IOException {
+        KeyGenerator keyGenerator = new KeyGenerator("CAF1");
+        AES c = new AES(keyGenerator);
+
+        String plaintext = new FileReader().getFileContent();
+        c.encrypt(plaintext);
 
 //        // TODO: remove next lines
 //        System.out.println("Keys");

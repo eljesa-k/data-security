@@ -2,10 +2,10 @@ package AES_GCM;
 
 import java.util.Arrays;
 
-public class Encryption {
+public class AES {
     private KeyGenerator keyGenerator;
     private boolean[] P;
-    public Encryption(KeyGenerator k){
+    public AES(KeyGenerator k){
         this.keyGenerator = k;
     }
 
