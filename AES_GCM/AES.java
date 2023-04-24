@@ -117,9 +117,13 @@ public class AES {
 
         // TODO: implement invMixColumns here
         // above E and F are hex values expressed on boolean
+        boolean[][] D = new boolean[4][4];
+        D[0] = Utilities.XOR(field.multiply(B[0], F), field.multiply(B[1],E));
+        D[2] = Utilities.XOR(field.multiply(B[2], F), field.multiply(B[3],E));
+        D[1] = Utilities.XOR(field.multiply(B[0], E), field.multiply(B[1],E));
+        D[3] = Utilities.XOR(field.multiply(B[2], E), field.multiply(B[3],E));
 
-
-        return null;
+        return D;
     }
 
 }
