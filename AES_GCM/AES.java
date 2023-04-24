@@ -4,18 +4,18 @@ import java.util.Arrays;
 
 public class AES {
     private KeyGenerator keyGenerator;
+    private GaloisField field;
     private boolean[] P;
-
     private final boolean[][][] s = {
             {{false, true, true, false}, {true, false, true, true}, {false, false, false, false}, {false, true, false, false}},
             {{false, true, true, true}, {true, true, true, false}, {false, false, true, false}, {true, true, true, true}},
             {{true, false, false, true}, {true, false, false, false}, {true, false, true, false}, {true, true, false, false}},
             {{false, false, true, true}, {false, false, false, true}, {false, true, false, true}, {true, true, false, true}}
     };
-
-    private final boolean[] S_AES_POLYNOMIAL = { true, false, false, true, true};
+    private final boolean[] S_AES_POLYNOMIAL = {true, false, false, true, true};
     public AES(KeyGenerator k){
         this.keyGenerator = k;
+        this.field = new GaloisField(S_AES_POLYNOMIAL, 4);
     }
 
     public String encrypt(String plainText){
@@ -76,15 +76,7 @@ public class AES {
 
             // Mix columns
             if(round != 3){
-                boolean[][] D = new boolean[4][4];
-
-                D[0] = Utilities.XOR(B[0], B[1]);
-                D[2] = Utilities.XOR(B[2], B[3]);
-
-                D[1] = mixColumnsSecondRow(B[0], B[1]);
-                D[3] = mixColumnsSecondRow(B[2], B[3]);
-
-                System.arraycopy(D, 0, B, 0, 4);
+                B = mixColumns(B);
             }
 
             System.arraycopy(B[0], 0, this.P, 0, 4);
@@ -94,39 +86,40 @@ public class AES {
         }
         P = Utilities.XOR(P, keyGenerator.getKey(round));
     }
+
     /**
      * Performs Substitute Box function on given input
      * @param input an array of boolean of length 4
      * @return Calculated output of S-AES, boolean array of length 4
      */
-    private boolean[] sBox(boolean[] input){
-        int row = 2*(input[0] ? 1 : 0) + (input[1] ? 1 : 0);
-        int col = 2*(input[2] ? 1 : 0) + (input[3] ? 1 : 0);
+    private boolean[] sBox(boolean[] input) {
+        int row = 2 * (input[0] ? 1 : 0) + (input[1] ? 1 : 0);
+        int col = 2 * (input[2] ? 1 : 0) + (input[3] ? 1 : 0);
         return Arrays.copyOf(s[row][col], 4);
     }
 
-    private boolean[] mixColumnsSecondRow(boolean[] C0, boolean[] C1){
-        boolean[] t1 = new boolean[5];
-        boolean[] t2 = new boolean[5];
-        boolean[] r = new boolean[5];
+    private boolean[][] mixColumns(boolean[][] B){
+        final boolean[] hex2 = {false, false, true, false};
+        boolean[][] D = new boolean[4][4];
 
-        // adding a 0 bit to left for padding
-        System.arraycopy(C0, 0, t2, 1, 4);
+        D[0] = Utilities.XOR(B[0], B[1]);
+        D[2] = Utilities.XOR(B[2], B[3]);
 
-        // shifting for one position to the left - equivalent of multiplying by 2
-        System.arraycopy(C1, 0, t1, 0, 4);
+        D[1] = Utilities.XOR(B[0], field.multiply(B[1], hex2));
+        D[3] = Utilities.XOR(B[2], field.multiply(B[3], hex2));
 
-        // adding the two together - addition on G(2^m) is same as XOR
-        System.arraycopy(Utilities.XOR(t1, t2), 0, r, 0, 5);
-
-        // if there is overflow we "subtract" the S-AES polynomial - which is equivalent to adding/XOR on G(2^m)
-        if(r[0])
-            r = Utilities.XOR(r, this.S_AES_POLYNOMIAL);
-
-        // remove the overflowing 0 bit
-        boolean[] res = new boolean[4];
-        System.arraycopy(r, 1, res, 0, 4);
-
-        return res;
+        return D;
     }
+
+    private boolean[][] invMixColumns(boolean[][] B){
+        final boolean[] E = {true, true, true, false};
+        final boolean[] F = {true, true, true, true};
+
+        // TODO: implement invMixColumns here
+        // above E and F are hex values expressed on boolean
+
+
+        return null;
+    }
+
 }
