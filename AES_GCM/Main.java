@@ -6,6 +6,7 @@ public class Main {
         KeyGenerator keyGenerator = new KeyGenerator("CAF1");
         AES c = new AES(keyGenerator);
         GCM g = new GCM(c, 0);
+        System.out.println("TEST ME");
 
 //        String plain_text = new FileReader().getFileContent();
 //        String plain_text = "AE24";
