@@ -1,8 +1,8 @@
 package AES_GCM;
 
 public class GaloisField {
-    private boolean[] polynomial;
-    public int length;
+    private final boolean[] polynomial;
+    public final int length;
     public GaloisField(boolean[] polynomial, int length){
         this.length = length;
         this.polynomial = polynomial;

@@ -3,8 +3,8 @@ package AES_GCM;
 import java.util.Arrays;
 
 public class AES {
-    private KeyGenerator keyGenerator;
-    private GaloisField field;
+    private final KeyGenerator keyGenerator;
+    private final GaloisField field;
     private boolean[] P;
     private final boolean[][][] s = {
             {{false, true, true, false}, {true, false, true, true}, {false, false, false, false}, {false, true, false, false}},
@@ -18,7 +18,7 @@ public class AES {
         this.field = new GaloisField(S_AES_POLYNOMIAL, 4);
     }
 
-    public String encrypt(String plainText){
+    public boolean[] encrypt(String plainText){
         this.P = new boolean[16];
         for(int i = 0; i < 4; i++){
             String converted = Utilities.toBinary(plainText.charAt(i));
@@ -44,11 +44,7 @@ public class AES {
             System.out.println("\n");
         }
 
-        StringBuilder res = new StringBuilder();
-        for(boolean bit : P){
-            res.append(bit ? '1' : '0');
-        }
-        return res.toString();
+        return Arrays.copyOf(this.P, this.P.length);
     }
 
     /**
