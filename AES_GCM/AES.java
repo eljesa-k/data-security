@@ -94,6 +94,7 @@ public class AES {
                 B[i] = this.sBox(B[i]);
             }
 
+            //shift
             boolean[] temp = B[1];
             B[1] = B[3];
             B[3] = temp;
@@ -106,7 +107,7 @@ public class AES {
             System.arraycopy(B[2], 0, this.P, 8, 4);
             System.arraycopy(B[3], 0, this.P, 12, 4);
         }
-
+        //addroundkey
         this.P = Utilities.XOR(this.P, this.keyGenerator.getKey(round));
     }
 
@@ -160,7 +161,7 @@ public class AES {
                 System.out.print((char)(bit ? '1' : '0'));
             }
 
-            System.out.print("\nCipher text = ");
+            System.out.print("\nPlain text = ");
             var3 = this.CipherText;
             var4 = var3.length;
 
