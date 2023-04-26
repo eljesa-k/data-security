@@ -116,8 +116,7 @@ public class Utilities {
     }
     public static String increaseBinaryByOne(String binaryNumber){
         int decimalNumber = Integer.parseInt(binaryNumber, 2);
-        decimalNumber++;
-        String binaryString = Integer.toBinaryString(decimalNumber);
+        String binaryString = convertFromDecimal(++decimalNumber, 2, 16);
         return binaryString;
     }
 }
