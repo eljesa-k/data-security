@@ -33,6 +33,24 @@ public class GaloisField {
         System.arraycopy(result, length -1, temp, 0, length);
         return temp;
     }
+    public String multiply(String a1, String b1){
+        boolean[] a = new boolean[a1.length()];
+        boolean[] b = new boolean[b1.length()];
+        for(int i = 0; i < a1.length(); i++) {
+            a[i] = a1.charAt(i) == '1';
+        }
+        for(int i = 0; i < b1.length(); i++) {
+            b[i] = b1.charAt(i) == '1';
+        }
+
+        boolean[] temp = multiply(a, b);
+
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < a1.length();  i+=4){
+            stringBuilder.append(temp[i] ? '1' : '0');
+        }
+        return stringBuilder.toString();
+    }
 
     private boolean[] normalize(boolean[] result){
         for(int i = 0; i < length-1; i++){
@@ -44,4 +62,6 @@ public class GaloisField {
         }
         return result;
     }
+
+
 }
