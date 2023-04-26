@@ -27,26 +27,28 @@ public class AES {
 
     public String encrypt(String plainText) {
         this.P = new boolean[16];
+        int k = 0;
 
-        int i;
-        int k;
-        for(i = 0; i < 4; ++i) {
-            String converted = Utilities.toBinary(plainText.charAt(i));
-            k = 0;
-            char[] var5 = converted.toCharArray();
-            int var6 = var5.length;
-
-            for(int var7 = 0; var7 < var6; ++var7) {
-                char bit = var5[var7];
-                this.P[4 * i + k] = bit == '1';
-                ++k;
-            }
+//        int i;
+//        for(i = 0; i < 4; ++i) {
+//            String converted = Utilities.toBinary(plainText.charAt(i));
+//            k = 0;
+//            char[] var5 = converted.toCharArray();
+//            int var6 = var5.length;
+//
+//            for(int var7 = 0; var7 < var6; ++var7) {
+//                char bit = var5[var7];
+//                this.P[4 * i + k] = bit == '1';
+//                ++k;
+//            }
+//        }
+        for(int i = 0; i < 16; ++i) {
+            this.P[i] = plainText.charAt(i) == '1';
         }
-
         boolean[] var10;
         int var11;
         boolean bit;
-        for(i = 0; i <= 3; ++i) {
+        for(int i = 0; i <= 3; ++i) {
             this.nextRoundEncryption(i);
             System.out.println("Round " + i);
             System.out.print("Key = ");
