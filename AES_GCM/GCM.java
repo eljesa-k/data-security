@@ -30,6 +30,7 @@ public class GCM {
         VI = "0000000000";
         counter = "0000";
         generalCounter = VI + counter;
+        generalCounterDecryption = VI + counter;
         System.out.println("VI: " + VI);
 
         this.H = AES_Algorithm.encrypt("0000000000000000");
