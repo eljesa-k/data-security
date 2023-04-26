@@ -25,11 +25,11 @@ public class GCM {
 
     public GCM(AES AES_Algorithm, String AAD) {
         this.AES_Algorithm = AES_Algorithm;
-//        VI = Utilities.generateIV(10);
         // TODO: remove next line
-        VI = "0000000000";
+        VI = Utilities.generateIV(12);
         counter = "0000";
         generalCounter = VI + counter;
+        System.out.println( " CTR: " + generalCounter);
         generalCounterDecryption = VI + counter;
         System.out.println("VI: " + VI);
 
@@ -40,43 +40,35 @@ public class GCM {
     public String[] encryptBlocksGCM(String plaintext){
         this.plaintext = plaintext;
         //divide plaintext into blocks
-        int num_blocks = plaintext.length()/16;
-        String[] blocks = new String[num_blocks];
-        for (int i = 0; i < num_blocks; i++){
-            blocks[i] = plaintext.substring(i, i+16);
+        String[] blocks = new String[4];
+        for (int i= 0,j=0; i < 49 && j<4; i+=16, j++){
+            blocks[j] = plaintext.substring(i, i+16);
         }
 
         String EkCtr0 = "";
 
         //encrypt each block from the plaintext
-        for (int i = 0; i <= num_blocks; i++){
+        int length = blocks.length;
+        for (int i = 0; i < length; i++){
             //skip on first time because counter starts at 0000
-            if (i == 0){
-                //encrypt GeneralCounter
-                EkCtr0 = AES_Algorithm.encrypt(VI + counter);
-                Tag = field.multiply(AAD, H);
-            }else{
-                counter = Utilities.increaseBinaryByOne(counter);
-                //encrypt GeneralCounter
-                String encryptedGeneralCounter = AES_Algorithm.encrypt(VI + counter);
-                //calculate XOR
-                BlocksGCM[i-1] = calculate_CTi(encryptedGeneralCounter, blocks[i]);
-                Tag = field.multiply(calculate_CTi(Tag, BlocksGCM[i-1]), H);
+            if (i !=0 ){
+                generalCounter = Utilities.increaseBinaryByOne(generalCounter);
             }
-
+            //encrypt GeneralCounter
+            String encryptedGeneralCounter = AES_Algorithm.encrypt(generalCounter);
+            //calculate XOR
+            BlocksGCM[i] = calculate_CTi(encryptedGeneralCounter, blocks[i]);
         }
-
-        Tag = calculate_CTi(Tag, EkCtr0);
         //return array of Strings that represent the encrypted blocks form the plaintext, array of Ct_i
-        return Arrays.copyOf(BlocksGCM, BlocksGCM.length);
+        return BlocksGCM;
     }
 
     public String[] decryptBlocksGCM(String cipherText){
         this.ciphertext = cipherText;
         //divide ciphertext into blocks
         String[] blocks = new String[4];
-        for (int i= 0,j=0; i < 13 && j<4; i+=4, j++){
-            blocks[i] = cipherText.substring(i, i+4);
+        for (int i= 0,j=0; i < 49 && j<4; i+=16, j++){
+            blocks[j] = cipherText.substring(i, i+16);
         }
 
         //encrypt each block from the ciphertext
@@ -109,7 +101,13 @@ public class GCM {
                 B[i] = true;
         }
         boolean[] result =  Utilities.XOR(A,B);
-        return  result.toString();
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i< result.length; i++){
+            if (result[i])
+                stringBuilder.append('1');
+            else stringBuilder.append('0');
+        }
+        return  stringBuilder.toString();
     }
 
 }
